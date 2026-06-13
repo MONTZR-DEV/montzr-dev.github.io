@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MONTZR-DEV | Portfolio</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -29,11 +33,35 @@
     body::before { top: 10%; right: 10%; }
     body::after { bottom: 15%; left: 10%; }
 
+    /* زر تبديل اللغة العائم الاحترافي */
+    .lang-switcher {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      color: #ffffff;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      z-index: 100;
+    }
+    .lang-switcher:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
     .main-container { max-width: 900px; margin: 60px auto; padding: 20px; }
 
     .profile-card {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 40px 30px;
       border-radius: 24px;
@@ -49,8 +77,6 @@
     .tagline { font-size: 1.1rem; color: #60a5fa; margin-bottom: 15px; }
     .bio-text { color: #9ca3af; font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 25px; }
 
-    .section-title { font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: right; padding-right: 5px; border-right: 3px solid #2563eb; }
-    
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
 
     .project-card {
@@ -58,16 +84,14 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       padding: 25px;
-      text-align: right;
       display: flex;
       flex-direction: column;
       transition: all 0.3s ease;
     }
-
     .project-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); border-color: rgba(59, 130, 246, 0.4); }
     
     .project-card h3 { color: #ffffff; margin-bottom: 10px; }
-    .project-card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; }
+    .project-card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; line-height: 1.6; }
 
     .card-links { display: flex; gap: 10px; }
     .link-btn {
@@ -81,10 +105,39 @@
     .git-link { background: #333; color: white; }
     .store-link { background: #2563eb; color: white; }
 
+    .buttons-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-primary { background: #2563eb; color: #ffffff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+    .btn-primary:hover { background: #1d4ed8; }
+
     footer { text-align: center; padding: 20px 0; color: #4b5563; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+
+    /* 🌍 قواعد التكيف والمحاذاة التلقائية بناءً على اتجاه الصفحة الإقليمي */
+    html[dir="rtl"] .section-title {
+      font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: right; padding-right: 10px; border-right: 3px solid #2563eb; border-left: none; padding-left: 0;
+    }
+    html[dir="ltr"] .section-title {
+      font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: left; padding-left: 10px; border-left: 3px solid #2563eb; border-right: none; padding-right: 0;
+    }
+    html[dir="rtl"] .project-card { text-align: right; }
+    html[dir="ltr"] .project-card { text-align: left; }
+    html[dir="ltr"] .lang-switcher { left: auto; right: 25px; }
   </style>
 </head>
 <body>
+
+  <button class="lang-switcher" id="langBtn" onclick="toggleLanguage()">English</button>
 
   <div class="main-container">
     <main class="profile-card">
@@ -92,62 +145,146 @@
         <img class="profile-avatar" src="313614.jpg" alt="MONTZR-DEV" />
       </div>
       <h1>MONTZR-DEV</h1>
-      <div class="tagline">Systems & Low-Level Programmer</div>
-      <p class="bio-text">
+      <div class="tagline" data-i18n="tagline">Systems & Low-Level Programmer</div>
+      <p class="bio-text" data-i18n="bio">
         مطور برمجيات وأنظمة منخفضة المستوى، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على بناء معمارية حماية الذاكرة والحلول الأمنية المتطورة لمعمارية ARM64.
       </p>
+      <div class="buttons-group">
+        <a class="btn btn-primary" href="https://github.com/MONTZR-DEV" target="_blank" data-i18n="github_btn">الملف الشخصي على GitHub</a>
+      </div>
     </main>
 
     <section>
-      <h2 class="section-title">المشاريع والتطبيقات</h2>
+      <h2 class="section-title" data-i18n="section_title">المشاريع والتطبيقات</h2>
       <div class="projects-grid">
         
-        <!-- CyberHook -->
         <div class="project-card">
           <h3>CyberHook</h3>
-          <p>إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.</p>
+          <p data-i18n="desc_cyberhook">إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.</p>
           <div class="card-links"><a href="https://github.com/MONTZR-DEV/CyberHook" class="link-btn git-link">GitHub</a></div>
         </div>
 
-        <!-- Cyber -->
         <div class="project-card">
-          <h3>Cyber PUBG Tool</h3>
-          <p>أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.</p>
+          <h3 data-i18n="title_cyber">أداة سايبر</h3>
+          <p data-i18n="desc_cyber">أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.</p>
         </div>
 
-        <!-- Sardab -->
         <div class="project-card">
-          <h3>Sardab Vault</h3>
-          <p>خزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.</p>
+          <h3 data-i18n="title_sardab">تطبيق سرداب</h3>
+          <p data-i18n="desc_sardab">حافظ وخزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.</p>
           <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.sardab" class="link-btn store-link">Google Play</a></div>
         </div>
 
-        <!-- Shadow Browser -->
         <div class="project-card">
           <h3>Shadow Browser</h3>
-          <p>متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.</p>
+          <p data-i18n="desc_shadow">متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.</p>
           <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.shadowbrowser" class="link-btn store-link">Google Play</a></div>
         </div>
 
-        <!-- Klecha -->
         <div class="project-card">
-          <h3>Klecha Generator</h3>
-          <p>معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.</p>
+          <h3 data-i18n="title_klecha">برنامج كليشة</h3>
+          <p data-i18n="desc_klecha">معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.</p>
         </div>
 
-        <!-- Teleiq -->
         <div class="project-card">
           <h3>Teleiq App</h3>
-          <p>عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.</p>
+          <p data-i18n="desc_teleiq">عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.</p>
         </div>
 
       </div>
     </section>
 
     <footer>
-      <p>© 2026 MONTZR-DEV. جميع الحقوق محفوظة.</p>
+      <p data-i18n="footer">© 2026 MONTZR-DEV. جميع الحقوق محفوظة.</p>
     </footer>
   </div>
+
+  <script>
+    const translations = {
+      ar: {
+        tagline: "Systems & Low-Level Programmer",
+        bio: "مطور برمجيات وأنظمة منخفضة المستوى، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على بناء معمارية حماية الذاكرة والحلول الأمنية المتطورة لمعمارية ARM64.",
+        github_btn: "الملف الشخصي على GitHub",
+        section_title: "المشاريع والتطبيقات",
+        title_cyber: "أداة سايبر",
+        title_sardab: "تطبيق سرداب",
+        title_klecha: "برنامج كليشة",
+        desc_cyberhook: "إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.",
+        desc_cyber: "أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.",
+        desc_sardab: "حافظ وخزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.",
+        desc_shadow: "متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.",
+        desc_klecha: "معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.",
+        desc_teleiq: "عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.",
+        footer: "© 2026 MONTZR-DEV. جميع الحقوق محفوظة."
+      },
+      en: {
+        tagline: "Systems & Low-Level Programmer",
+        bio: "A low-level systems programmer passionate about deep computing mechanics and runtime vulnerabilities. Focusing on memory protection architectures and advanced ARM64 engineering solutions.",
+        github_btn: "GitHub Profile",
+        section_title: "Projects & Applications",
+        title_cyber: "Cyber Tool",
+        title_sardab: "Sardab Vault",
+        title_klecha: "Klecha Generator",
+        desc_cyberhook: "An advanced ARM64-v8A framework engineered for dynamic instruction hooking and layout remapping, bypassing memory integrity CRC validations.",
+        desc_cyber: "A premium, high-performance optimization tool tailored for PUBG Mobile, offering exclusive execution parameters.",
+        desc_sardab: "An encrypted vault designed to lock and secure private photos, videos, and applications away from systemic access permissions.",
+        desc_shadow: "A high-security privacy browser integrated with Tor network routing for untraceable and fully anonymous web operations.",
+        desc_klecha: "An automated repository allowing users to instantly browse, generate, and copy tailored captions for visual contexts.",
+        desc_teleiq: "An optimized standalone Telegram instance routing communication streams through Tor proxy matrices for cryptographic privacy.",
+        footer: "© 2026 MONTZR-DEV. All rights reserved."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function initLanguage() {
+      // 1. تفقد وجود تفضيل سابق مخزن بذاكرة التصفح
+      const savedLang = localStorage.getItem('portfolio_lang');
+      if (savedLang) {
+        currentLang = savedLang;
+      } else {
+        // 2. فحص لغة نظام المتصفح الحالية
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('ar')) {
+          currentLang = 'ar';
+        } else {
+          currentLang = 'en'; // افتراضي قياسي للغات الأخرى
+        }
+      }
+      applyLanguage(currentLang);
+    }
+
+    function applyLanguage(lang) {
+      // تحديث اتجاه وهيكل الـ DOM
+      if (lang === 'ar') {
+        document.documentElement.dir = 'rtl';
+        document.documentElement.lang = 'ar';
+        document.getElementById('langBtn').innerText = 'English';
+      } else {
+        document.documentElement.dir = 'ltr';
+        document.documentElement.lang = 'en';
+        document.getElementById('langBtn').innerText = 'العربية';
+      }
+
+      // حقن كتل النصوص المطابقة ديناميكياً
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          element.innerText = translations[lang][key];
+        }
+      });
+
+      localStorage.setItem('portfolio_lang', lang);
+    }
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+      applyLanguage(currentLang);
+    }
+
+    // بدء الفحص الذاتي فور تحميل الهيكل
+    window.addEventListener('DOMContentLoaded', initLanguage);
+  </script>
 
 </body>
 </html>
