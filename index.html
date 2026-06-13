@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MONTZR-DEV | Portfolio</title>
   <style>
-    /* إعدادات الخطوط والخلفية الحركية العميقة */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,7 +16,6 @@
       position: relative;
     }
 
-    /* هالات الإضاءة الخلفية الضبابية لعمق بصري مميز */
     body::before, body::after {
       content: "";
       position: absolute;
@@ -35,17 +29,11 @@
     body::before { top: 10%; right: 10%; }
     body::after { bottom: 15%; left: 10%; }
 
-    .main-container {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
-    }
+    .main-container { max-width: 900px; margin: 60px auto; padding: 20px; }
 
-    /* تصميم واجهة الزجاج الضبابي (Glassmorphism) */
     .profile-card {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 40px 30px;
       border-radius: 24px;
@@ -54,62 +42,16 @@
       margin-bottom: 40px;
     }
 
-    /* تنسيق الصورة الشخصية المرفوعة */
-    .avatar-wrapper {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 20px;
-    }
+    .avatar-wrapper { position: relative; width: 130px; height: 130px; margin: 0 auto 20px; }
+    .profile-avatar { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid rgba(59, 130, 246, 0.6); }
 
-    .profile-avatar {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 2px solid rgba(59, 130, 246, 0.6);
-      box-shadow: 0 0 25px rgba(37, 99, 235, 0.3);
-    }
+    h1 { font-size: 2.2rem; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+    .tagline { font-size: 1.1rem; color: #60a5fa; margin-bottom: 15px; }
+    .bio-text { color: #9ca3af; font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 25px; }
 
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-
-    .tagline {
-      font-size: 1.1rem;
-      color: #60a5fa;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-
-    .bio-text {
-      color: #9ca3af;
-      font-size: 1rem;
-      line-height: 1.8;
-      max-width: 600px;
-      margin: 0 auto 25px;
-    }
-
-    /* شبكة عرض المشاريع */
-    .section-title {
-      font-size: 1.4rem;
-      color: #ffffff;
-      margin-bottom: 20px;
-      text-align: right;
-      padding-right: 5px;
-      border-right: 3px solid #2563eb;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
+    .section-title { font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: right; padding-right: 5px; border-right: 3px solid #2563eb; }
+    
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
 
     .project-card {
       background: rgba(255, 255, 255, 0.02);
@@ -117,137 +59,94 @@
       border-radius: 16px;
       padding: 25px;
       text-align: right;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
-    }
-
-    .project-card h3 {
-      color: #ffffff;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-
-    .project-card p {
-      color: #9ca3af;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    /* أزرار الإجراءات والروابط */
-    .buttons-group {
       display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      transition: all 0.3s ease;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 28px;
-      font-size: 0.95rem;
+    .project-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); border-color: rgba(59, 130, 246, 0.4); }
+    
+    .project-card h3 { color: #ffffff; margin-bottom: 10px; }
+    .project-card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; }
+
+    .card-links { display: flex; gap: 10px; }
+    .link-btn {
+      padding: 8px 15px;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      text-decoration: none;
       font-weight: 600;
-      text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: #1d4ed8;
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: #f3f4f6;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    footer {
       text-align: center;
-      padding: 20px 0;
-      color: #4b5563;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
+    .git-link { background: #333; color: white; }
+    .store-link { background: #2563eb; color: white; }
 
-    footer a {
-      color: #4b5563;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: #60a5fa;
-    }
+    footer { text-align: center; padding: 20px 0; color: #4b5563; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
   </style>
 </head>
 <body>
 
   <div class="main-container">
-    
     <main class="profile-card">
       <div class="avatar-wrapper">
-        <img class="profile-avatar" src="313614.jpg" alt="MONTZR DEV Profile" />
+        <img class="profile-avatar" src="313614.jpg" alt="MONTZR-DEV" />
       </div>
-      
       <h1>MONTZR-DEV</h1>
       <div class="tagline">Systems & Low-Level Programmer</div>
-      
       <p class="bio-text">
         مطور برمجيات وأنظمة منخفضة المستوى، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على بناء معمارية حماية الذاكرة والحلول الأمنية المتطورة لمعمارية ARM64.
       </p>
-
-      <div class="buttons-group">
-        <a class="btn btn-primary" href="teleiq_privacy_policy.html">سياسة الخصوصية</a>
-        <a class="btn btn-secondary" href="https://github.com/MONTZR-DEV" target="_blank">مستودع GitHub</a>
-      </div>
     </main>
 
     <section>
-      <h2 class="section-title">المشاريع الحالية</h2>
+      <h2 class="section-title">المشاريع والتطبيقات</h2>
       <div class="projects-grid">
         
-        <div class="project-card">
-          <h3>TeleIQ App</h3>
-          <p>عميل تليجرام متطور للأندرويد مدمج محلياً بمعمارية توجيه شبكات Tor لضمان خصوصية مطلقة للاتصالات.</p>
-        </div>
-
-        <div class="project-card">
-          <h3>Sardab Vault</h3>
-          <p>تطبيق خزنة أندرويد مشفر وعالي الأمان لحماية وتعمية البيانات الحساسة بعيداً عن الصلاحيات المخترقة.</p>
-        </div>
-
+        <!-- CyberHook -->
         <div class="project-card">
           <h3>CyberHook</h3>
-          <p>إطار عمل مخصص لمعمارية ARM64-v8A لعمل خطافات صامتة عبر الذاكرة الظلية والـ Syscalls لتخطي فحص الـ CRC كلياً.</p>
+          <p>إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.</p>
+          <div class="card-links"><a href="https://github.com/MONTZR-DEV/CyberHook" class="link-btn git-link">GitHub</a></div>
+        </div>
+
+        <!-- Cyber -->
+        <div class="project-card">
+          <h3>Cyber PUBG Tool</h3>
+          <p>أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.</p>
+        </div>
+
+        <!-- Sardab -->
+        <div class="project-card">
+          <h3>Sardab Vault</h3>
+          <p>خزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.</p>
+          <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.sardab" class="link-btn store-link">Google Play</a></div>
+        </div>
+
+        <!-- Shadow Browser -->
+        <div class="project-card">
+          <h3>Shadow Browser</h3>
+          <p>متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.</p>
+          <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.shadowbrowser" class="link-btn store-link">Google Play</a></div>
+        </div>
+
+        <!-- Klecha -->
+        <div class="project-card">
+          <h3>Klecha Generator</h3>
+          <p>معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.</p>
+        </div>
+
+        <!-- Teleiq -->
+        <div class="project-card">
+          <h3>Teleiq App</h3>
+          <p>عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.</p>
         </div>
 
       </div>
     </section>
 
     <footer>
-      <p>© 2026 MONTZR-DEV. جميع الحقوق محفوظة لـ <a href="#">teleiq</a>.</p>
+      <p>© 2026 MONTZR-DEV. جميع الحقوق محفوظة.</p>
     </footer>
-
   </div>
 
 </body>
