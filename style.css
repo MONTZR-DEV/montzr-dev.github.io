@@ -185,3 +185,6 @@ html[dir=rtl] .st::after{background:linear-gradient(270deg,#3d8bff,transparent)}
 footer{max-width:1010px}
 footer a{color:#b8c9ee}
 @media(max-width:760px){.links a{padding:8px 12px}.hero{padding:34px 24px;text-align:center;justify-items:center}.hero .btns{justify-content:center}.avatar{width:150px;height:150px}.feat-art{min-height:220px}.st::after{flex-basis:60px}.feat-body{padding:26px 22px}}
+
+/* v5.1: brand without image */
+.brand{padding-inline-start:14px;font-size:1.08rem;letter-spacing:.05em}
