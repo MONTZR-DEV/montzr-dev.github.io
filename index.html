@@ -1,290 +1,71 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr" data-title-ar="MONTZR-DEV | المطوّر" data-title-en="MONTZR-DEV | Portfolio">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MONTZR-DEV | Portfolio</title>
-  <style>
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #030712;
-      color: #f3f4f6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    body::before, body::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(60px);
-      z-index: -1;
-    }
-    body::before { top: 10%; right: 10%; }
-    body::after { bottom: 15%; left: 10%; }
-
-    /* زر تبديل اللغة العائم الاحترافي */
-    .lang-switcher {
-      position: absolute;
-      top: 25px;
-      left: 25px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 10px 20px;
-      color: #ffffff;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      z-index: 100;
-    }
-    .lang-switcher:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
-
-    .main-container { max-width: 900px; margin: 60px auto; padding: 20px; }
-
-    .profile-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 40px 30px;
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .avatar-wrapper { position: relative; width: 130px; height: 130px; margin: 0 auto 20px; }
-    .profile-avatar { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid rgba(59, 130, 246, 0.6); }
-
-    h1 { font-size: 2.2rem; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
-    .tagline { font-size: 1.1rem; color: #60a5fa; margin-bottom: 15px; }
-    .bio-text { color: #9ca3af; font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 25px; }
-
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-
-    .project-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-    }
-    .project-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); border-color: rgba(59, 130, 246, 0.4); }
-    
-    .project-card h3 { color: #ffffff; margin-bottom: 10px; }
-    .project-card p { color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; line-height: 1.6; }
-
-    .card-links { display: flex; gap: 10px; }
-    .link-btn {
-      padding: 8px 15px;
-      font-size: 0.8rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      text-align: center;
-    }
-    .git-link { background: #333; color: white; }
-    .store-link { background: #2563eb; color: white; }
-
-    .buttons-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 28px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .btn-primary { background: #2563eb; color: #ffffff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
-    .btn-primary:hover { background: #1d4ed8; }
-
-    footer { text-align: center; padding: 20px 0; color: #4b5563; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-
-    /* 🌍 قواعد التكيف والمحاذاة التلقائية بناءً على اتجاه الصفحة الإقليمي */
-    html[dir="rtl"] .section-title {
-      font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: right; padding-right: 10px; border-right: 3px solid #2563eb; border-left: none; padding-left: 0;
-    }
-    html[dir="ltr"] .section-title {
-      font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; text-align: left; padding-left: 10px; border-left: 3px solid #2563eb; border-right: none; padding-right: 0;
-    }
-    html[dir="rtl"] .project-card { text-align: right; }
-    html[dir="ltr"] .project-card { text-align: left; }
-    html[dir="ltr"] .lang-switcher { left: auto; right: 25px; }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONTZR-DEV | Portfolio</title>
+<meta name="description" content="MONTZR-DEV portfolio: systems programming, Android apps and the VANTA RIDE game.">
+<meta property="og:title" content="MONTZR-DEV | Portfolio"><meta property="og:description" content="MONTZR-DEV portfolio: systems programming, Android apps and the VANTA RIDE game."><meta property="og:image" content="313614.jpg">
+<meta name="theme-color" content="#030712"><link rel="icon" href="313614.jpg">
+<link rel="stylesheet" href="style.css">
+<script src="main.js"></script>
 </head>
 <body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<header class="nav"><div class="nav-inner">
+<a class="brand" href="index.html"><img src="313614.jpg" alt="MONTZR-DEV">MONTZR-DEV</a>
+<nav class="links"><a href="index.html" class="active hide-m"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="vanta-ride.html" class=""><span class="ar">VANTA RIDE</span><span class="en">VANTA RIDE</span></a><a href="vanta-ride-privacy.html" class=""><span class="ar">الخصوصية</span><span class="en">Privacy</span></a><a href="vanta-ride-delete-account.html" class="hide-m"><span class="ar">حذف الحساب</span><span class="en">Delete account</span></a>
+<button class="lang" onclick="toggleLanguage()">English</button></nav></div></header>
+<main class="wrap">
 
-  <button class="lang-switcher" id="langBtn" onclick="toggleLanguage()">English</button>
+<section class="hero glass reveal">
+ <div class="avatar"><img src="313614.jpg" alt="MONTZR-DEV"></div>
+ <div class="badge"><span class="dot"></span><span class="ar">متاح للمشاريع</span><span class="en">Available for projects</span></div>
+ <h1><span class="grad">MONTZR-DEV</span></h1>
+ <p style="color:var(--sky);font-weight:600;margin-bottom:12px">Systems &amp; Low-Level Programmer · Game Developer</p>
+ <p class="lead"><span class="ar">مطور برمجيات وأنظمة منخفضة المستوى ومطوّر ألعاب، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على معمارية حماية الذاكرة وحلول ARM64، وأبني ألعاب وتطبيقات أندرويد حديثة.</span><span class="en">A low-level systems programmer and game developer passionate about deep computing mechanics. Focused on memory protection architectures, ARM64 engineering, and building modern Android games and apps.</span></p>
+ <div class="btns">
+  <a class="btn btn-p" href="vanta-ride.html">🏍️ <span class="ar">العب VANTA RIDE</span><span class="en">Play VANTA RIDE</span></a>
+  <a class="btn btn-g" href="https://github.com/MONTZR-DEV" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></svg><span class="ar">الملف الشخصي على GitHub</span><span class="en">GitHub Profile</span></a>
+ </div>
+ <div class="stats">
+  <div class="stat"><b>7+</b><span><span class="ar">مشاريع</span><span class="en">Projects</span></span></div>
+  <div class="stat"><b>ARM64</b><span><span class="ar">أنظمة</span><span class="en">Systems</span></span></div>
+  <div class="stat"><b>Unity</b><span><span class="ar">ألعاب</span><span class="en">Games</span></span></div>
+ </div>
+</section>
 
-  <div class="main-container">
-    <main class="profile-card">
-      <div class="avatar-wrapper">
-        <img class="profile-avatar" src="313614.jpg" alt="MONTZR-DEV" />
-      </div>
-      <h1>MONTZR-DEV</h1>
-      <div class="tagline" data-i18n="tagline">Systems & Low-Level Programmer</div>
-      <p class="bio-text" data-i18n="bio">
-        مطور برمجيات وأنظمة منخفضة المستوى، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على بناء معمارية حماية الذاكرة والحلول الأمنية المتطورة لمعمارية ARM64.
-      </p>
-      <div class="buttons-group">
-        <a class="btn btn-primary" href="https://github.com/MONTZR-DEV" target="_blank" data-i18n="github_btn">الملف الشخصي على GitHub</a>
-      </div>
-    </main>
-
-    <section>
-      <h2 class="section-title" data-i18n="section_title">المشاريع والتطبيقات</h2>
-      <div class="projects-grid">
-        
-        <div class="project-card">
-          <h3>CyberHook</h3>
-          <p data-i18n="desc_cyberhook">إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.</p>
-          <div class="card-links"><a href="https://github.com/MONTZR-DEV/CyberHook" class="link-btn git-link">GitHub</a></div>
-        </div>
-
-        <div class="project-card">
-          <h3 data-i18n="title_cyber">أداة سايبر</h3>
-          <p data-i18n="desc_cyber">أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.</p>
-        </div>
-
-        <div class="project-card">
-          <h3 data-i18n="title_sardab">تطبيق سرداب</h3>
-          <p data-i18n="desc_sardab">حافظ وخزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.</p>
-          <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.sardab" class="link-btn store-link">Google Play</a></div>
-        </div>
-
-        <div class="project-card">
-          <h3>Shadow Browser</h3>
-          <p data-i18n="desc_shadow">متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.</p>
-          <div class="card-links"><a href="https://play.google.com/store/apps/details?id=dev.montzr.shadowbrowser" class="link-btn store-link">Google Play</a></div>
-        </div>
-
-        <div class="project-card">
-          <h3 data-i18n="title_klecha">برنامج كليشة</h3>
-          <p data-i18n="desc_klecha">معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.</p>
-        </div>
-
-        <div class="project-card">
-          <h3>Teleiq App</h3>
-          <p data-i18n="desc_teleiq">عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <footer>
-      <p data-i18n="footer">© 2026 MONTZR-DEV. جميع الحقوق محفوظة.</p>
-    </footer>
+<section class="section" id="game">
+ <h2 class="st"><span class="ar">اللعبة المميزة</span><span class="en">Featured Game</span></h2>
+ <p class="sub"><span class="ar">أحدث مشاريعي — سباق دراجات أونلاين</span><span class="en">My latest project — an online motorcycle racer</span></p>
+ <div class="feat glass reveal">
+  <div class="feat-art"><div class="road"></div><div class="logo"><div class="mark">VANTA RIDE</div><div class="tag">TRAFFIC · RACING · ONLINE</div></div></div>
+  <div class="feat-body">
+   <h3>VANTA RIDE</h3>
+   <p><span class="ar">لعبة سباق دراجات نارية بين الزحام بسرعة عالية. تسابق أونلاين ويا 4 لاعبين، وطوّر دراجتك، واصعد بالتصنيف، وضيف أصدقائك بالاسم أو الـ ID.</span><span class="en">A high-speed motorcycle traffic racing game. Race online with up to 4 players, upgrade your bike, climb the ranked tiers, and add friends by name or player ID.</span></p>
+   <div class="chips"><span class="chip">🏁 <span class="ar">أونلاين 4 لاعبين</span><span class="en">4-player online</span></span><span class="chip">🏆 <span class="ar">تصنيف</span><span class="en">Ranked</span></span><span class="chip">👥 <span class="ar">أصدقاء</span><span class="en">Friends</span></span><span class="chip">🎮 Google Play Games</span></div>
+   <div class="btns" style="justify-content:flex-start">
+    <a class="btn btn-p" href="https://play.google.com/store/apps/details?id=com.montzrdev.vantaride" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1L13.6 12v-.2L3.7 1.7l-.1.1zm13.3 13.5-3.3-3.3V12l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2-.1-.2zm-.1.1L13.4 12l-9.8 9.8c.4.4 1 .4 1.7.1l11.5-6.5m0-10.8L5.3 2.1c-.7-.4-1.3-.3-1.7.1l9.8 9.8 3.4-3.4z"/></svg>Google Play</a>
+    <a class="btn btn-g" href="vanta-ride.html"><span class="ar">تفاصيل اللعبة</span><span class="en">Game details</span></a>
+   </div>
+   <div class="mini"><a href="vanta-ride-privacy.html"><span class="ar">سياسة الخصوصية</span><span class="en">Privacy Policy</span></a><a href="vanta-ride-delete-account.html"><span class="ar">حذف الحساب</span><span class="en">Delete account</span></a></div>
   </div>
+ </div>
+</section>
 
-  <script>
-    const translations = {
-      ar: {
-        tagline: "Systems & Low-Level Programmer",
-        bio: "مطور برمجيات وأنظمة منخفضة المستوى، شغوف بالبحث العميق ودقائق الأمور التقنية. أركز على بناء معمارية حماية الذاكرة والحلول الأمنية المتطورة لمعمارية ARM64.",
-        github_btn: "الملف الشخصي على GitHub",
-        section_title: "المشاريع والتطبيقات",
-        title_cyber: "أداة سايبر",
-        title_sardab: "تطبيق سرداب",
-        title_klecha: "برنامج كليشة",
-        desc_cyberhook: "إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.",
-        desc_cyber: "أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.",
-        desc_sardab: "حافظ وخزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.",
-        desc_shadow: "متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.",
-        desc_klecha: "معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.",
-        desc_teleiq: "عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.",
-        footer: "© 2026 MONTZR-DEV. جميع الحقوق محفوظة."
-      },
-      en: {
-        tagline: "Systems & Low-Level Programmer",
-        bio: "A low-level systems programmer passionate about deep computing mechanics and runtime vulnerabilities. Focusing on memory protection architectures and advanced ARM64 engineering solutions.",
-        github_btn: "GitHub Profile",
-        section_title: "Projects & Applications",
-        title_cyber: "Cyber Tool",
-        title_sardab: "Sardab Vault",
-        title_klecha: "Klecha Generator",
-        desc_cyberhook: "An advanced ARM64-v8A framework engineered for dynamic instruction hooking and layout remapping, bypassing memory integrity CRC validations.",
-        desc_cyber: "A premium, high-performance optimization tool tailored for PUBG Mobile, offering exclusive execution parameters.",
-        desc_sardab: "An encrypted vault designed to lock and secure private photos, videos, and applications away from systemic access permissions.",
-        desc_shadow: "A high-security privacy browser integrated with Tor network routing for untraceable and fully anonymous web operations.",
-        desc_klecha: "An automated repository allowing users to instantly browse, generate, and copy tailored captions for visual contexts.",
-        desc_teleiq: "An optimized standalone Telegram instance routing communication streams through Tor proxy matrices for cryptographic privacy.",
-        footer: "© 2026 MONTZR-DEV. All rights reserved."
-      }
-    };
+<section class="section">
+ <h2 class="st"><span class="ar">المشاريع والتطبيقات</span><span class="en">Projects &amp; Applications</span></h2>
+ <p class="sub"><span class="ar">أدوات وتطبيقات أندرويد وأنظمة</span><span class="en">Android apps, tools and systems work</span></p>
+ <div class="grid">
+<div class="card glass reveal"><div class="ic">🛡️</div><h3><span class="ar">CyberHook</span><span class="en">CyberHook</span></h3><p><span class="ar">إطار عمل متطور لـ ARM64-v8A لاختراق التدفق البرمجي وحقن الذاكرة، مصمم لتجاوز فحوصات الـ CRC الأمنية.</span><span class="en">An advanced ARM64-v8A framework engineered for dynamic instruction hooking and layout remapping, bypassing memory integrity CRC validations.</span></p><div class="cl"><a class="lb gh" href="https://github.com/MONTZR-DEV/CyberHook" target="_blank" rel="noopener">GitHub</a></div></div>
+<div class="card glass reveal"><div class="ic">⚡</div><h3><span class="ar">أداة سايبر</span><span class="en">Cyber Tool</span></h3><p><span class="ar">أداة احترافية مدفوعة مخصصة للعبة ببجي موبايل، تقدم مميزات حصرية وأداءً عالياً لتجربة لعب متكاملة.</span><span class="en">A premium, high-performance optimization tool tailored for PUBG Mobile, offering exclusive execution parameters.</span></p><div class="cl"><span class="soon"><span class="ar">قريباً</span><span class="en">Coming soon</span></span></div></div>
+<div class="card glass reveal"><div class="ic">🔐</div><h3><span class="ar">تطبيق سرداب</span><span class="en">Sardab Vault</span></h3><p><span class="ar">حافظ وخزنة مشفرة لحماية صورك، فيديوهاتك، وتطبيقاتك السرية بخصوصية عالية بعيداً عن المتطفلين.</span><span class="en">An encrypted vault designed to lock and secure private photos, videos, and applications away from systemic access permissions.</span></p><div class="cl"><a class="lb gp" href="https://play.google.com/store/apps/details?id=dev.montzr.sardab" target="_blank" rel="noopener">Google Play</a></div></div>
+<div class="card glass reveal"><div class="ic">🕶️</div><h3><span class="ar">Shadow Browser</span><span class="en">Shadow Browser</span></h3><p><span class="ar">متصفح الخصوصية المطلقة، مدمج بتقنيات Tor لتصفح ويب خفي وآمن تماماً بعيداً عن أعين التعقب.</span><span class="en">A high-security privacy browser integrated with Tor network routing for untraceable and fully anonymous web operations.</span></p><div class="cl"><a class="lb gp" href="https://play.google.com/store/apps/details?id=dev.montzr.shadowbrowser" target="_blank" rel="noopener">Google Play</a></div></div>
+<div class="card glass reveal"><div class="ic">🖼️</div><h3><span class="ar">برنامج كليشة</span><span class="en">Klecha Generator</span></h3><p><span class="ar">معرض رقمي متكامل يتيح لك تصفح وتوليد كليشات جاهزة للصور، مع إمكانية النسخ والاستخدام المباشر بلمسة واحدة.</span><span class="en">An automated repository allowing users to instantly browse, generate, and copy tailored captions for visual contexts.</span></p><div class="cl"><span class="soon"><span class="ar">قريباً</span><span class="en">Coming soon</span></span></div></div>
+<div class="card glass reveal"><div class="ic">✈️</div><h3><span class="ar">Teleiq App</span><span class="en">Teleiq App</span></h3><p><span class="ar">عميل تليجرام متطور للأندرويد، يعتمد على شبكة Tor لتأمين اتصالاتك ومنع كشف هويتك الرقمية.</span><span class="en">An optimized standalone Telegram instance routing communication streams through Tor proxy matrices for cryptographic privacy.</span></p><div class="cl"><a class="lb gh" href="teleiq_privacy_policy.html"><span class="ar">سياسة الخصوصية</span><span class="en">Privacy Policy</span></a></div></div>
+ </div>
+</section>
 
-    let currentLang = 'en';
-
-    function initLanguage() {
-      // 1. تفقد وجود تفضيل سابق مخزن بذاكرة التصفح
-      const savedLang = localStorage.getItem('portfolio_lang');
-      if (savedLang) {
-        currentLang = savedLang;
-      } else {
-        // 2. فحص لغة نظام المتصفح الحالية
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('ar')) {
-          currentLang = 'ar';
-        } else {
-          currentLang = 'en'; // افتراضي قياسي للغات الأخرى
-        }
-      }
-      applyLanguage(currentLang);
-    }
-
-    function applyLanguage(lang) {
-      // تحديث اتجاه وهيكل الـ DOM
-      if (lang === 'ar') {
-        document.documentElement.dir = 'rtl';
-        document.documentElement.lang = 'ar';
-        document.getElementById('langBtn').innerText = 'English';
-      } else {
-        document.documentElement.dir = 'ltr';
-        document.documentElement.lang = 'en';
-        document.getElementById('langBtn').innerText = 'العربية';
-      }
-
-      // حقن كتل النصوص المطابقة ديناميكياً
-      document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-          element.innerText = translations[lang][key];
-        }
-      });
-
-      localStorage.setItem('portfolio_lang', lang);
-    }
-
-    function toggleLanguage() {
-      currentLang = (currentLang === 'ar') ? 'en' : 'ar';
-      applyLanguage(currentLang);
-    }
-
-    // بدء الفحص الذاتي فور تحميل الهيكل
-    window.addEventListener('DOMContentLoaded', initLanguage);
-  </script>
-
-</body>
-</html>
+</main>
+<footer><div style="margin-bottom:10px"><a href="index.html"><span class="ar">الرئيسية</span><span class="en">Home</span></a><a href="vanta-ride.html">VANTA RIDE</a><a href="vanta-ride-privacy.html"><span class="ar">سياسة الخصوصية</span><span class="en">Privacy Policy</span></a><a href="vanta-ride-delete-account.html"><span class="ar">حذف الحساب</span><span class="en">Account deletion</span></a><a href="mailto:m00585254@gmail.com">m00585254@gmail.com</a></div>
+<p>© <span id="yr">2026</span> MONTZR-DEV. <span class="ar">جميع الحقوق محفوظة.</span><span class="en">All rights reserved.</span></p></footer>
+</body></html>
