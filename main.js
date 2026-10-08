@@ -10,9 +10,9 @@
   setLang(q==='ar'||q==='en'?q:(s||((navigator.language||'en').indexOf('ar')===0?'ar':'en')));
   window.toggleLanguage=function(){setLang(document.documentElement.lang==='ar'?'en':'ar')};
   document.addEventListener('DOMContentLoaded',function(){
-    var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12}):null;
-    document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in')});
-    document.querySelectorAll('.card').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')})});
+    document.querySelectorAll('.glass').forEach(function(c){
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')});
+    });
     var y=document.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
   });
 })();
